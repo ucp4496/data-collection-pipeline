@@ -25,13 +25,13 @@ python -m src.repo_miner fetch-commits --repo owner/repo [--max 100] --out commi
 If you encounter missing dependency warnings, install the required packages:
 
 ```bash
-pip install PyGithub pandas
+pip install -r requirements.txt
 ```
 
 Or, on some systems:
 
 ```bash
-pip3 install PyGithub pandas
+pip3 install -r requirements.txt
 ```
 
 ---
