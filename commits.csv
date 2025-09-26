@@ -1,0 +1,11 @@
+sha,author,email,date,message
+4ff71af020ae59ae2d83b174646fc2ad9fcd4dc4,Linus Torvalds,torvalds@linux-foundation.org,2025-09-25T15:23:52+00:00,Merge tag 'net-6.17-rc8' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+93a274456158f178aa713fbb60642e0094e6065e,Linus Torvalds,torvalds@linux-foundation.org,2025-09-25T15:06:03+00:00,Merge tag 'for_linus' of git://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost
+d9c70e93ec5988ab07ad2a92d9f9d12867f02c56,Dan Carpenter,dan.carpenter@linaro.org,2025-09-23T11:19:11+00:00,octeontx2-pf: Fix potential use after free in otx2_tc_add_flow()
+764a47a639c73e8d941cbbb10696a0eb98d10d7b,Paolo Abeni,pabeni@redhat.com,2025-09-25T08:29:22+00:00,Merge branch 'lantiq_gswip-fixes'
+987afe147965ef7a8e7d144ffef0d70af14bb1d4,Vladimir Oltean,vladimir.oltean@nxp.com,2025-09-18T07:21:42+00:00,net: dsa: lantiq_gswip: suppress -EINVAL errors for bridge FDB entries added to the CPU port
+c0054b25e2f1045f47b4954cf13a539e5e6047df,Vladimir Oltean,vladimir.oltean@nxp.com,2025-09-18T07:21:41+00:00,net: dsa: lantiq_gswip: move gswip_add_single_port_br() call to port_setup()
+bf40f4b87761e2ec16efc8e49b9ca0d81f4115d8,Linus Torvalds,torvalds@linux-foundation.org,2025-09-25T02:17:07+00:00,Merge tag 'probes-fixes-v6.17-rc7' of git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace
+b7e32ae6664285e156e9f0cd821e63e19798baf7,Jacob Keller,jacob.e.keller@intel.com,2025-09-23T20:56:56+00:00,libie: fix string names for AQ error codes
+d0ca0df179c4b21e2a6c4a4fb637aa8fa14575cb,Eric Biggers,ebiggers@kernel.org,2025-09-24T20:18:22+00:00,crypto: af_alg - Fix incorrect boolean values in af_alg_ctx
+ea78c190810ecd2c9dfb6d22b52fc670a38e8836,Linus Torvalds,torvalds@linux-foundation.org,2025-09-24T21:37:44+00:00,Merge tag 'soc-fixes-6.17-3' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
