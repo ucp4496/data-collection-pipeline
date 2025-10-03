@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import pytest
 from datetime import datetime, timedelta
-from src.repo_miner import fetch_commits #, fetch_issues, merge_and_summarize
+from src.repo_miner import fetch_commits, fetch_issues #, merge_and_summarize
 
 # --- Helpers for dummy GitHub API objects ---
 
@@ -105,4 +105,62 @@ def test_fetch_commits_empty(monkeypatch):
     assert df.empty
     assert list(df.columns) == ["sha", "author", "email", "date", "message"]
 
-#LLM usage: point me to the documentation, help with explanation of it, basic debugging assistance
+def test_fetch_issues_basic(monkeypatch):
+    now = datetime.now()
+    issues = [
+        DummyIssue(1, 101, "Issue A", "alice", "open", now, None, 0),
+        DummyIssue(2, 102, "Issue B", "bob", "closed", now - timedelta(days=2), now, 2)
+    ]
+    gh_instance._repo = DummyRepo([], issues)
+    df = fetch_issues("any/repo", state="all")
+    assert {"id", "number", "title", "user", "state", "created_at", "closed_at", "comments"}.issubset(df.columns)
+    assert len(df) == 2
+
+    # Check date normalization
+    created_str = df.iloc[0]["created_at"]
+    closed_str = df.iloc[1]["closed_at"]
+
+    assert isinstance(created_str, str) and "T" in created_str
+    assert isinstance(closed_str, str) and "T" in closed_str
+
+def test_fetch_issues_excludes_prs(monkeypatch):
+    now = datetime.now()
+    issues = [
+        DummyIssue(1, 101, "Regular Issue", "alice", "open", now, None, 0),
+        DummyIssue(2, 102, "Looks like PR", "bob", "open", now, None, 0, is_pr=True)
+    ]
+    gh_instance._repo = DummyRepo([], issues)
+    df = fetch_issues("any/repo", state="all")
+
+    assert len(df) == 1
+
+def test_fetch_issues_dates_are_iso8601(monkeypatch):
+    now = datetime(2025, 9, 25, 12, 30, 45)
+    closed = datetime(2025, 9, 26, 13, 15, 0)
+
+    issues = [
+        DummyIssue(1, 101, "Issue A", "alice", "closed", now, closed, 5)
+    ]
+    gh_instance._repo = DummyRepo([], issues)
+    df = fetch_issues("any/repo", state="all")
+
+    created_str = df.iloc[0]["created_at"]
+    closed_str = df.iloc[0]["closed_at"]
+
+    assert created_str == "2025-09-25T12:30:45"
+    assert closed_str == "2025-09-26T13:15:00"
+
+
+def test_fetch_issues_open_duration_days(monkeypatch):
+    created = datetime(2025, 9, 20, 10, 0, 0)
+    closed = datetime(2025, 9, 25, 10, 0, 0)
+    issues = [
+        DummyIssue(1, 101, "Closed Issue", "alice", "closed", created, closed, 3)
+    ]
+    gh_instance._repo = DummyRepo([], issues)
+    df = fetch_issues("any/repo", state="all")
+
+    duration = df.iloc[0]["open_duration_days"]
+    assert duration == 5
+
+#LLM usage: point me to the documentation, help with explanation of it, basic debugging assistance, giving me random data ideas
