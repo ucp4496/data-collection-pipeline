@@ -6,7 +6,7 @@ This repository contains the **Data Collection Pipeline** project for **Model-Dr
 
 ## Running the CLI
 
-To fetch commits and export them to a CSV file, run:
+To fetch **commits** and export them to a CSV file, run:
 
 ```bash
 python -m src.repo_miner fetch-commits --repo owner/repo [--max 100] --out commits.csv
@@ -15,6 +15,19 @@ python -m src.repo_miner fetch-commits --repo owner/repo [--max 100] --out commi
 - Replace `owner/repo` with the GitHub repository you want to analyze.  
 - The `--max` flag is optional and limits the number of commits fetched.  
 - The `--out` flag specifies the output file (e.g., `commits.csv`).  
+
+
+To fetch **issues** and export them to a CSV file, run:
+
+```bash
+python -m src.repo_miner fetch-issues --repo owner/repo [--state all|open|closed] [--max 50] --out issues.csv
+```
+
+- Replace `owner/repo` with the GitHub repository you want to analyze.  
+- The `--state` flag is optional and filters issues by status (all, open, or closed). Default is all.
+- The `--max` flag is optional and limits the number of commits fetched.  
+- The `--out` flag specifies the output file (e.g., `commits.csv`).  
+
 
 **Note:** Depending on your configuration, you may need to use `python3` instead of `python`.
 
