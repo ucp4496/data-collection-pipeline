@@ -29,6 +29,15 @@ python -m src.repo_miner fetch-issues --repo owner/repo [--state all|open|closed
 - The `--out` flag specifies the output file (e.g., `commits.csv`).  
 
 
+To **summarize** commits and export them to a CSV file, run:
+
+```bash
+python -m src.repo_miner summarize --commits commits.csv --issues issues.csv
+```
+
+- The `--commits` flag specifies the path to the CSV file containing commit data.
+- The `--issues` flag specifies the path to the CSV file containing issue data.
+
 **Note:** Depending on your configuration, you may need to use `python3` instead of `python`.
 
 ---
